@@ -19,7 +19,7 @@ def curl_progress(id):
 
 def test_curl():
     
-    num_files = 6
+    num_files = 2
     # file_names = ['input/kTo84xXwdKk0qzkYnx8Ic09qWZELRS.pdf','input/256277.pdf']
     files = glob('input/*.pdf')
     file_names = random.choices(files,k=num_files)
