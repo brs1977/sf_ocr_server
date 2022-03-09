@@ -1,10 +1,16 @@
+rebuild: stop clean build run test
+
+clean:
+	find ./output -mtime +30 -exec rm {} +
+
 run:
 	docker run -d -p 9095:9095 --name sf_ocr --rm -v /home/rttec/projects/sf_ocr_server/output/:/usr/src/app/output sf_ocr 
 stop:
 	docker stop sf_ocr
 build:
-	docker build --build-arg SF_OCR_VERSION=0.1.1 . -t sf_ocr
+	docker build --build-arg SF_OCR_VERSION=0.1.8 . -t sf_ocr
 test:
+	#timeout 2
 	python test.py
 logs:
 	docker logs sf_ocr

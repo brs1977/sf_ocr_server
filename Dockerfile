@@ -18,6 +18,7 @@ RUN cd tesseract-5.0.0-beta-20210916 && \
     ldconfig
 
 RUN wget https://github.com/tesseract-ocr/tessdata/blob/main/rus.traineddata?raw=true -O /usr/local/share/tessdata/rus.traineddata
+RUN wget https://github.com/tesseract-ocr/tessdata/blob/main/eng.traineddata?raw=true -O /usr/local/share/tessdata/eng.traineddata
 
 
 RUN python -m pip install --upgrade pip
