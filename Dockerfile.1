@@ -13,7 +13,7 @@ ARG TESSERACT_VERSION=5.5.0
 
 # tesseract 5.0
 RUN wget --no-check-certificate https://github.com/tesseract-ocr/tesseract/archive/refs/tags/${TESSERACT_VERSION}.zip
-RUN unzip ${TESSERACT_VERSION}.zip
+RUN unzip tesseract-${TESSERACT_VERSION}.zip
 
 RUN cd tesseract-${TESSERACT_VERSION} && \
     autoreconf --install && \
@@ -21,9 +21,10 @@ RUN cd tesseract-${TESSERACT_VERSION} && \
     make && \
     make install && \
     ldconfig
+RUN apt install -y --no-install-recommends tesseract-ocr-{eng,rus}
 
-RUN wget --no-check-certificate https://github.com/tesseract-ocr/tessdata/blob/main/rus.traineddata?raw=true -O /usr/local/share/tessdata/rus.traineddata
-RUN wget --no-check-certificate https://github.com/tesseract-ocr/tessdata/blob/main/eng.traineddata?raw=true -O /usr/local/share/tessdata/eng.traineddata
+#RUN wget --no-check-certificate https://github.com/tesseract-ocr/tessdata/blob/main/rus.traineddata?raw=true -O /usr/local/share/tessdata/rus.traineddata
+#RUN wget --no-check-certificate https://github.com/tesseract-ocr/tessdata/blob/main/eng.traineddata?raw=true -O /usr/local/share/tessdata/eng.traineddata
 
 
 RUN python -m pip install --upgrade pip

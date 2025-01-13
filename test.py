@@ -6,14 +6,15 @@ import time
 import random
 # import pytesseract
 
+BASE_URL = '127.0.0.1:9075'
 
 def curl_ocr(file_name):
-    base_url = '127.0.0.1:9095/ocr'
+    base_url =  f'{BASE_URL}/ocr'
     response = subprocess.check_output(['curl', '-s', '-F', 'file=@'+file_name, base_url])    
     return json.loads(response.decode("utf-8"))['id']
 
 def curl_progress(id):
-    base_url = '127.0.0.1:9095/progress/'
+    base_url = f'{BASE_URL}/progress/'
     response = subprocess.check_output(['curl', '-s', base_url + id])    
     return json.loads(response.decode("utf-8"))
 

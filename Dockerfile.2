@@ -1,27 +1,13 @@
 FROM python:3.12.3-bullseye
-#FROM tiangolo/uvicorn-gunicorn-fastapi:python3.12.3
+ENV PYHTONUNBUFFERED=1
 
-# EXPOSE 9085
-#RUN apk add apt-get
+#RUN apt-get update -y && apt-get install -y python3-pip python3-dev build-essential libgl1-mesa-dev curl autoconf libtool libleptonica-dev
 
-RUN apt-get update -y && apt-get install -y python3-pip python3-dev build-essential libgl1-mesa-dev curl autoconf libtool libleptonica-dev
+RUN apt-get update \
+	&& apt-get -y install tesseract-ocr \
+	&& apt-get -y install ffmpeg libsm6 libxext6
 
-#tesseract-ocr-rus #libsqlite3-dev
-
-#ARG TESSERACT_VERSION=5.0.0-beta-20210916
-ARG TESSERACT_VERSION=5.5.0
-
-# tesseract 5.0
-RUN wget --no-check-certificate https://github.com/tesseract-ocr/tesseract/archive/refs/tags/${TESSERACT_VERSION}.zip
-RUN unzip ${TESSERACT_VERSION}.zip
-
-RUN cd tesseract-${TESSERACT_VERSION} && \
-    autoreconf --install && \
-    ./configure && \
-    make && \
-    make install && \
-    ldconfig
-
+#/usr/share/tesseract-ocr/tessdata or /usr/share/tessdata or /usr/share/tesseract-ocr/4.00/tessdata
 RUN wget --no-check-certificate https://github.com/tesseract-ocr/tessdata/blob/main/rus.traineddata?raw=true -O /usr/local/share/tessdata/rus.traineddata
 RUN wget --no-check-certificate https://github.com/tesseract-ocr/tessdata/blob/main/eng.traineddata?raw=true -O /usr/local/share/tessdata/eng.traineddata
 
