@@ -8,7 +8,7 @@ run:
 stop:
 	docker stop sf_ocr_test
 build:
-	docker build --build-arg SF_OCR_VERSION=0.1.10 . -t sf_ocr_test
+	docker build --build-arg SF_OCR_VERSION=0.1.11 . -t sf_ocr_test
 test:
 	#timeout 2
 	python test.py
